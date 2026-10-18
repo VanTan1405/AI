@@ -9,6 +9,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
     <link rel="stylesheet" href="styles.css" />
+    <link rel="stylesheet" href="projects.css" />
   </head>
   <body>
     <div class="app-shell">
@@ -31,7 +32,8 @@
       </header>
       <div class="workspace">
         <aside class="left-sidebar">
-          <div class="sidebar-heading"><div><h1>Không gian làm việc</h1><p>Ý tưởng thành hình</p></div><button class="small-icon" id="newDiagramButton" title="Sơ đồ mới">＋</button></div>
+          <div class="sidebar-heading"><div><h1>Không gian làm việc</h1><p>Ý tưởng thành hình</p></div><button class="small-icon" id="newDiagramButton" title="Tạo project mới">＋</button></div>
+          <section class="project-section"><div class="project-section-title">PROJECT CỦA TÔI <span id="projectCount">1</span></div><div id="projectsList" class="projects-list"></div></section>
           <div class="sidebar-tabs"><button class="tab active">Hình dạng</button><button class="tab" id="templatesTab">Mẫu</button></div>
           <div class="shape-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg><input id="shapeSearch" placeholder="Tìm hình dạng" /></div>
           <div id="shapePanel">
