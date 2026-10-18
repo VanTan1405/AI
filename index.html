@@ -1,0 +1,112 @@
+<!doctype html>
+<html lang="vi">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="theme-color" content="#f5f6f8" />
+    <title>Flowboard — Không gian sơ đồ của bạn</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <header class="topbar">
+        <div class="brand-area">
+          <a class="brand-mark" href="#" aria-label="Flowboard"><svg viewBox="0 0 36 36" aria-hidden="true"><rect x="3" y="4" width="13" height="11" rx="3"/><rect x="20" y="4" width="13" height="11" rx="3"/><rect x="3" y="21" width="13" height="11" rx="3"/><rect x="20" y="21" width="13" height="11" rx="3"/><path d="M16 9.5h4M9.5 15v6m17-6v6M16 26.5h4"/></svg></a>
+          <span class="brand-name">flowboard</span>
+          <span class="top-divider"></span>
+          <button class="doc-name" id="docNameButton" title="Nhấp để đổi tên">Sơ đồ quy trình <span class="tiny-caret">▾</span></button>
+          <span class="save-status"><span class="status-dot"></span><span id="saveStatus">Đã lưu</span></span>
+        </div>
+        <div class="top-actions">
+          <button class="icon-button" id="undoButton" title="Hoàn tác (Ctrl+Z)" aria-label="Hoàn tác"><svg viewBox="0 0 24 24"><path d="M9 14 4 9l5-5M4 9h10a6 6 0 0 1 0 12h-2"/></svg></button>
+          <button class="icon-button" id="redoButton" title="Làm lại (Ctrl+Shift+Z)" aria-label="Làm lại"><svg viewBox="0 0 24 24"><path d="m15 14 5-5-5-5m5 5H10a6 6 0 0 0 0 12h2"/></svg></button>
+          <span class="top-divider slim"></span>
+          <button class="icon-button" id="exportButton" title="Xuất sơ đồ" aria-label="Xuất sơ đồ"><svg viewBox="0 0 24 24"><path d="M12 3v12m-5-5 5 5 5-5M5 17v4h14v-4"/></svg></button>
+          <button class="share-button" id="shareButton"><svg viewBox="0 0 24 24"><path d="M12 16V4m-5 5 5-5 5 5M5 14v6h14v-6"/></svg> Chia sẻ</button>
+          <button class="avatar" title="Tài khoản">Q</button>
+        </div>
+      </header>
+      <div class="workspace">
+        <aside class="left-sidebar">
+          <div class="sidebar-heading"><div><h1>Không gian làm việc</h1><p>Ý tưởng thành hình</p></div><button class="small-icon" id="newDiagramButton" title="Sơ đồ mới">＋</button></div>
+          <div class="sidebar-tabs"><button class="tab active">Hình dạng</button><button class="tab" id="templatesTab">Mẫu</button></div>
+          <div class="shape-search"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="m16 16 4 4"/></svg><input id="shapeSearch" placeholder="Tìm hình dạng" /></div>
+          <div id="shapePanel">
+            <div class="shape-section"><div class="section-label">CƠ BẢN <button class="section-chevron">⌄</button></div><div class="shape-grid">
+              <button class="shape-item" data-shape="rect"><span class="shape-icon shape-rect"></span><span>Quy trình</span></button>
+              <button class="shape-item" data-shape="round"><span class="shape-icon shape-round"></span><span>Bước</span></button>
+              <button class="shape-item" data-shape="diamond"><span class="shape-icon shape-diamond"></span><span>Quyết định</span></button>
+              <button class="shape-item" data-shape="circle"><span class="shape-icon shape-circle"></span><span>Điểm nối</span></button>
+              <button class="shape-item" data-shape="database"><span class="shape-icon shape-database"></span><span>Dữ liệu</span></button>
+              <button class="shape-item" data-shape="doc"><span class="shape-icon shape-doc"></span><span>Tài liệu</span></button>
+              <button class="shape-item" data-shape="parallelogram"><span class="shape-icon shape-parallelogram"></span><span>Đầu vào</span></button>
+              <button class="shape-item" data-shape="hexagon"><span class="shape-icon shape-hex"></span><span>Tiến trình</span></button>
+            </div></div>
+            <div class="shape-section"><div class="section-label">CHÚ THÍCH <button class="section-chevron">⌄</button></div><div class="shape-grid two">
+              <button class="shape-item" data-shape="note"><span class="shape-icon shape-note">Aa</span><span>Ghi chú</span></button>
+              <button class="shape-item" data-shape="text"><span class="shape-icon shape-text">T</span><span>Văn bản</span></button>
+            </div></div>
+            <div class="tip-card"><span class="tip-spark">✳</span><div><strong>Mẹo nhanh</strong><p>Kéo một hình vào bảng vẽ để bắt đầu sơ đồ.</p></div></div>
+          </div>
+          <div id="templatePanel" class="template-panel hidden">
+            <button class="template-card" data-template="flow"><span class="template-preview preview-flow"><i></i><i></i><i></i><b></b></span><strong>Quy trình cơ bản</strong><small>Bắt đầu với các bước và quyết định</small></button>
+            <button class="template-card" data-template="org"><span class="template-preview preview-org"><i></i><i></i><i></i><i></i><b></b></span><strong>Sơ đồ tổ chức</strong><small>Trình bày nhóm và vai trò</small></button>
+          </div>
+        </aside>
+        <main class="editor">
+          <div class="toolbar">
+            <div class="tool-group">
+              <button class="tool-button active" data-tool="select" title="Chọn và di chuyển (V)"><svg viewBox="0 0 24 24"><path d="m5 3 14 10-7 1-3 7L5 3Z"/></svg></button>
+              <button class="tool-button" data-tool="connect" title="Nối các hình (C)"><svg viewBox="0 0 24 24"><circle cx="6" cy="18" r="2.5"/><circle cx="18" cy="6" r="2.5"/><path d="M8 16 16 8"/></svg></button>
+              <button class="tool-button" data-tool="text" title="Thêm văn bản (T)"><svg viewBox="0 0 24 24"><path d="M4 6V4h16v2M12 4v16m-4 0h8"/></svg></button>
+            </div>
+            <span class="toolbar-divider"></span>
+            <button class="tool-button" id="zoomOut" title="Thu nhỏ"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5M7.5 10.5h6"/></svg></button>
+            <button class="zoom-label" id="zoomLabel">100%</button>
+            <button class="tool-button" id="zoomIn" title="Phóng to"><svg viewBox="0 0 24 24"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5M7.5 10.5h6m-3-3v6"/></svg></button>
+            <button class="tool-button fit-button" id="fitButton" title="Vừa khung vẽ"><svg viewBox="0 0 24 24"><path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/></svg></button>
+            <div class="toolbar-spacer"></div>
+            <button class="view-button" id="gridToggle"><span class="grid-mini">▦</span> Lưới <span class="toggle on" id="gridSwitch"><i></i></span></button>
+            <button class="view-button" id="minimapButton"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M7 8h4v3H7zm7 5h4v4h-4z"/></svg> Bản đồ</button>
+          </div>
+          <div class="canvas-wrap" id="canvasWrap">
+            <div class="canvas-board" id="canvasBoard">
+              <svg id="diagram" xmlns="http://www.w3.org/2000/svg" width="2200" height="1400" viewBox="0 0 2200 1400" aria-label="Bảng vẽ sơ đồ">
+                <defs><pattern id="dotGrid" width="22" height="22" patternUnits="userSpaceOnUse"><circle cx="1.5" cy="1.5" r="1.05" fill="#d9dee7"/></pattern><marker id="arrow" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 10 5 0 10z" fill="#97a1b2"/></marker><marker id="arrowSelected" markerWidth="10" markerHeight="10" refX="8" refY="5" orient="auto"><path d="M0 0 10 5 0 10z" fill="#604eea"/></marker></defs>
+                <rect class="grid-bg" width="2200" height="1400" fill="url(#dotGrid)"/>
+                <g id="edges"></g><g id="nodes"></g>
+              </svg>
+            </div>
+            <div class="canvas-hint" id="canvasHint"><span>✦</span><strong>Bắt đầu từ một ý tưởng</strong><p>Kéo hình dạng từ thanh bên trái vào bảng vẽ</p><button id="addFirstShape">Thêm bước đầu tiên <span>→</span></button></div>
+            <div class="canvas-coordinates" id="coordinates">0, 0</div>
+            <div class="minimap hidden" id="minimap"><div class="mini-map-content" id="miniMapContent"></div><button id="closeMinimap" aria-label="Đóng bản đồ">×</button><span>BẢN ĐỒ SƠ ĐỒ</span></div>
+            <div class="selection-menu hidden" id="selectionMenu"><button data-action="duplicate" title="Nhân bản">⧉</button><button data-action="connect" title="Nối hình">↗</button><button data-action="delete" title="Xóa">⌫</button></div>
+          </div>
+          <footer class="statusbar"><div><span class="status-check">✓</span> Tất cả thay đổi đã lưu</div><span class="status-separator">·</span><span id="objectCount">0 hình dạng</span><div class="statusbar-spacer"></div><span class="keyboard-hint"><kbd>Space</kbd> + kéo để di chuyển</span><span class="status-separator">·</span><button id="helpButton">Trợ giúp</button></footer>
+        </main>
+        <aside class="right-sidebar">
+          <div class="right-tabs"><button class="right-tab active" data-right-tab="style">Kiểu dáng</button><button class="right-tab" data-right-tab="layers">Lớp</button></div>
+          <div id="stylePanel">
+            <div class="inspector-empty" id="inspectorEmpty"><div class="empty-illustration"><span></span><i></i><b></b></div><strong>Chọn một hình để chỉnh sửa</strong><p>Tùy chỉnh màu sắc, văn bản và đường viền từ đây.</p></div>
+            <div id="inspector" class="hidden">
+              <div class="inspector-section"><div class="inspector-label">VĂN BẢN</div><textarea id="nodeText" rows="2" placeholder="Nhập nội dung"></textarea><div class="text-controls"><select id="fontSize"><option value="12">12 px</option><option value="14" selected>14 px</option><option value="16">16 px</option><option value="18">18 px</option><option value="22">22 px</option></select><button class="format-button" data-format="bold"><b>B</b></button><button class="format-button" data-format="italic"><i>I</i></button><button class="format-button" data-format="align">☷</button></div></div>
+              <div class="inspector-section"><div class="inspector-label">MÀU TÔ <button class="reset-link" id="resetFill">Đặt lại</button></div><div class="color-row"><button class="color-chip" data-color="#ffffff" style="--chip:#fff"></button><button class="color-chip" data-color="#f0edff" style="--chip:#f0edff"></button><button class="color-chip" data-color="#e8f4ff" style="--chip:#e8f4ff"></button><button class="color-chip" data-color="#e7f7ee" style="--chip:#e7f7ee"></button><button class="color-chip" data-color="#fff3df" style="--chip:#fff3df"></button><label class="color-custom" title="Màu tùy chỉnh"><span>＋</span><input type="color" id="fillColor" value="#ffffff" /></label></div></div>
+              <div class="inspector-section"><div class="inspector-label">ĐƯỜNG VIỀN</div><div class="color-row"><button class="color-chip border-chip" data-border="#758098" style="--chip:#758098"></button><button class="color-chip border-chip" data-border="#604eea" style="--chip:#604eea"></button><button class="color-chip border-chip" data-border="#28a879" style="--chip:#28a879"></button><button class="color-chip border-chip" data-border="#e99635" style="--chip:#e99635"></button><button class="color-chip border-chip" data-border="#e45d70" style="--chip:#e45d70"></button><label class="color-custom" title="Màu viền tùy chỉnh"><span>＋</span><input type="color" id="borderColor" value="#758098" /></label></div><div class="line-weight"><span>Độ dày</span><select id="lineWidth"><option value="1">Mỏng</option><option value="2" selected>Vừa</option><option value="3">Dày</option></select></div></div>
+              <div class="inspector-section"><div class="inspector-label">KÍCH THƯỚC</div><div class="dimension-fields"><label>Rộng<input id="nodeWidth" type="number" min="40" max="800" /></label><label>Cao<input id="nodeHeight" type="number" min="30" max="500" /></label></div></div>
+              <div class="inspector-section"><div class="inspector-label">ĐỘ MỜ</div><div class="opacity-row"><input id="opacity" type="range" min="20" max="100" value="100"/><span id="opacityValue">100%</span></div></div>
+            </div>
+          </div>
+          <div id="layersPanel" class="hidden"><div class="layers-heading"><span>Các đối tượng</span><button id="sortLayers" title="Đảo thứ tự">↕</button></div><div id="layersList" class="layers-list"><div class="layers-empty">Các hình trên bảng vẽ sẽ xuất hiện ở đây.</div></div></div>
+          <div class="right-sidebar-footer"><button id="keyboardButton"><span>⌘</span> Phím tắt <kbd>?</kbd></button><button class="feedback-button" id="feedbackButton">Gửi phản hồi <span>↗</span></button></div>
+        </aside>
+      </div>
+    </div>
+    <div class="toast hidden" id="toast"></div>
+    <div class="modal-backdrop hidden" id="modalBackdrop"><div class="modal" role="dialog" aria-modal="true"><button class="modal-close" id="modalClose">×</button><div id="modalContent"></div></div></div>
+    <input type="file" id="openFileInput" accept=".json,application/json" hidden />
+    <script src="app.js"></script>
+  </body>
+</html>
